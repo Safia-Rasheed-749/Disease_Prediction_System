@@ -3,6 +3,9 @@ import joblib
 import pickle
 import numpy as np
 import os
+# import sys
+PORT = int(os.environ.get("PORT", 7860))
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODELS_DIR = os.path.join(BASE_DIR, 'models')
@@ -147,5 +150,8 @@ with gr.Blocks(title="Disease Prediction System") as demo:
 
     predict_btn.click(fn=predict_disease, inputs=[selected], outputs=[output])
 if __name__ == "__main__":
-    demo.launch(share=True)
-
+    demo.launch(
+            server_name="0.0.0.0",
+            server_port=int(os.environ.get("PORT", 7860)),
+            share=False
+        )
